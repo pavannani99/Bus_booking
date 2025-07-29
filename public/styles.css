@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #e0f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  width: 80%;
+  max-width: 600px;
+  text-align: left;
+}
+
+.bus-layout, .input-section, .output-section {
+  margin-bottom: 20px;
+}
+
+.bus-layout h3 {
+  margin-bottom: 10px;
+}
+
+.layout-diagram {
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.dots {
+  text-align: center;
+  margin: 10px 0;
+}
+
+textarea {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  background: #00796b;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #004d40;
+}
+
+.output-section {
+  background: #fafafa;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+h1, h3 {
+  color: #00796b;
+}
+
+.entry {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}

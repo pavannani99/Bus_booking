@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🚌 Bus Boarding Sequence Generator</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="container">
+    <h1>🚌 Bus Boarding Sequence Generator</h1>
+    
+    <div class="bus-layout">
+      <h3>Bus Layout</h3>
+      <div class="layout-diagram">
+        <div class="row"><span>A20/B20</span><span>C20/D20</span></div>
+        <div class="dots">...</div>
+        <div class="row"><span>A2/B2</span><span>C2/D2</span></div>
+        <div class="row"><span>A1/B1</span><span>C1/D1</span></div>
+        <div class="entry">🚪 ENTRY</div>
+      </div>
+    </div>
+    
+    <div class="input-section">
+      <h3>Enter Booking Data</h3>
+      <textarea id="input" rows="4" placeholder="Format: Booking_ID,Seat1,Seat2,...
+
+Example:
+101,A1,B1
+120,A20,C2">101,A1,B1
+120,A20,C2</textarea>
+      <br><br>
+      <button onclick="generate()">🚀 Generate Sequence</button>
+    </div>
+    
+    <div class="output-section">
+      <h3>Boarding Order</h3>
+      <div id="output">Click "Generate Sequence" to see the boarding order.</div>
+    </div>
+  </div>
+
+  <script>
+    async function generate() {
+      const raw = document.getElementById('input').value.trim().split('\n');
+      const bookingData = raw.map(line => {
+        const [id, ...seats] = line.replaceAll(' ', '').split(',');
+        return { id: parseInt(id), seats };
+      });
+
+      const res = await fetch('/generate-sequence', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingData })
+      });
+
+      const data = await res.json();
+      const output = document.getElementById('output');
+
+      if (data.error) {
+        output.innerHTML = `<div style="color: red;">❌ ${data.error}</div>`;
+        return;
+      }
+
+      output.innerHTML = data.sequence.map(
+        x => `<div><strong>Seq ${x.seq}:</strong> Booking ID ${x.bookingId}</div>`
+      ).join('');
+    }
+  </script>
+</body>
+</html>
